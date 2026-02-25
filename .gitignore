@@ -1,0 +1,11 @@
+node_modules
+.yarn
+.env
+.env.*
+coverage
+dist
+build
+*.log
+apps/backend/dist
+apps/frontend/dist
+.prisma

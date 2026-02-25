@@ -1,0 +1,148 @@
+{
+  "info": {
+    "name": "Inventory Platform API",
+    "description": "Postman collection for the modular monolith POS + Inventory backend APIs.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "9fb897a0-616c-4af4-a75b-7e28bf45ef38"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api"
+    },
+    {
+      "key": "email",
+      "value": "manager@bluepos.local"
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/login"
+          }
+        }
+      ]
+    },
+    {
+      "name": "POS",
+      "item": [
+        {
+          "name": "POS Health",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/pos/health"
+          }
+        },
+        {
+          "name": "Checkout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    { \"sku\": \"BLU-POS-001\", \"qty\": 2 },\n    { \"sku\": \"BLU-POS-014\", \"qty\": 1 }\n  ]\n}"
+            },
+            "url": "{{baseUrl}}/pos/checkout"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Inventory",
+      "item": [
+        {
+          "name": "Inventory Snapshot",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/inventory/snapshot"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Catalog",
+      "item": [
+        {
+          "name": "Get Products",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/catalog/products"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Purchasing",
+      "item": [
+        {
+          "name": "Open Purchase Orders",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/purchasing/open-pos"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reporting",
+      "item": [
+        {
+          "name": "Daily Report",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/reporting/daily"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Integrations",
+      "item": [
+        {
+          "name": "Integrations Status",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/integrations/status"
+          }
+        },
+        {
+          "name": "Emit Inventory Adjusted Event",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sku\": \"BLU-POS-001\",\n  \"warehouse\": \"WH-A\",\n  \"delta\": -1,\n  \"reason\": \"sale_checkout\"\n}"
+            },
+            "url": "{{baseUrl}}/integrations/inventory-adjusted"
+          }
+        }
+      ]
+    }
+  ]
+}

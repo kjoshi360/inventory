@@ -47,3 +47,8 @@ yarn lint         # lint frontend/backend
 yarn prisma:gen   # generate prisma client
 yarn prisma:mig   # run development migration
 ```
+
+## Postman
+
+- Collection: `postman/InventoryPlatform.postman_collection.json`
+- Import into Postman and use `{{baseUrl}}` (default `http://localhost:3000/api`).
